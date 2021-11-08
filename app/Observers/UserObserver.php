@@ -32,6 +32,10 @@ class UserObserver
     public function updated(User $user)
     {
         //
+        $email_list['email'] = env('MAIL_TO_ADDRESS');
+        $email_list['user'] = 'Admin';
+
+        dispatch(new \App\Jobs\QueueJob($email_list));
     }
 
     /**
@@ -43,6 +47,10 @@ class UserObserver
     public function deleted(User $user)
     {
         //
+        $email_list['email'] = env('MAIL_TO_ADDRESS');
+        $email_list['user'] = 'Admin';
+
+        dispatch(new \App\Jobs\QueueJob($email_list));
     }
 
     /**

@@ -3,7 +3,7 @@
         <title>Laravel 8 Mail Send using Queue Example</title>
     </head>
     <body>
-{{--        <p>Hi {{ $email_list['user']->name }}</p>--}}
+        <p>Hi {{$email_list['user']->name}}</p>
         <p> This is test email and sent using queue.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmodtempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
             quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo

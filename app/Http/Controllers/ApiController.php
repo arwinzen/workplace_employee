@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\EmployeeResource;
 use App\Models\Department;
 use App\Models\Job;
 use App\Models\User;
@@ -80,6 +81,31 @@ class ApiController extends Controller
 //        return view('dashboard.users', [
 //            'users' => User::paginate(10)
 //        ]);
+    }
+
+    /**
+     * Display Employees API.
+     *
+     * Get all employees by pagination
+     * @bodyParam page int optional Page number for pagination. Example: 1
+     *
+     * @authenticated
+     * @header Authorization Bearer {{token}}
+     * @response 401 scenario="invalid token"
+     */
+    public function getEmployee (){
+        $employee = User::where('id', auth()->user()->id)->first();
+        $response = Gate::inspect('update', $employee);
+
+        if($response->allowed()){
+            $employees = Employee::paginate(10);
+            return $this->jsonResponse(
+                EmployeeResource::collection($employees)
+            );
+        } else {
+            echo $response->message();
+        }
+
     }
 
     /**

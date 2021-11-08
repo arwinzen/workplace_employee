@@ -70,6 +70,9 @@ class UserPolicy
     public function delete(User $user, User $model)
     {
         //
+        return $user->role == $model->id || $user->role == 1
+            ? Response::allow()
+            : Response::deny('You cannot edit this user.');
     }
 
     /**
